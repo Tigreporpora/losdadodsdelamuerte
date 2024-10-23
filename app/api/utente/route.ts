@@ -48,6 +48,8 @@ export async function POST(req: Request) {
         const sesso = formData.get('sesso')
         const dataregistrazione = (new Date()).toLocaleDateString()
         
+
+        
         var pool = await mysql.createConnection({
             host: hostname,
             user: 'root',
@@ -63,8 +65,13 @@ export async function POST(req: Request) {
         pool.on("error", function () {
             console.error("pool error - max connection reached, waiting for release...");
         });
-    
-        await pool.query('INSERT INTO Utente value(10, "' + username1 +'", "' + sesso + '", "' + data + '", "' + dataregistrazione + '", "' + password1 + '")');
+
+        const [results, fields]= (await pool.query(`SELECT MAX(ID) as Max_ID FROM Utente;`))
+        const new_ID = results[0].Max_ID +1
+       
+    //generare un numero che sia maggiore di 1 dell'ID più alto della tabella utente e inserirlo nella successiva inser
+    //usare esempio della get come base
+        await pool.query('INSERT INTO Utente value('+ new_ID  +',"' + username1 +'", "' + sesso + '", "' + data + '", "' + dataregistrazione + '", "' + password1 + '")');
 
         return NextResponse.json({ data: true }, { status: 200 });
     }
