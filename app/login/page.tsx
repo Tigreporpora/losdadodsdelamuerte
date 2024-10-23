@@ -1,7 +1,7 @@
 export default function Login() {
-    return (
-      <div>
-        {/* 
+  return (
+    <div>
+      {/* 
             inviare con una post i dati della form 
             con una get selezionare esclusivamente il campo con il nome utente corrispondente 
             fare get su utenti con where su non utente passato 
@@ -12,18 +12,21 @@ export default function Login() {
             se è false andare alla registrazione
 
           */}
-        <div> 
-          <div>
-             <input type="text" placeholder="Username" />
-          </div>
-          <div>
-            <input type="password" placeholder="password" />
-          </div>
-          <div>
-             <button>Entra</button>
-          </div>
+      <form action='/api/login' method="post">
+
+        <div>
+          <label htmlFor="user"> Username:</label>
+          <input name="username" type="text" placeholder="Username" />
         </div>
-  
-      </div> 
-    );
-  }
+        <div>
+          <label htmlFor="pass"> Password:</label>
+          <input name="password" type="password" placeholder="password" />
+        </div>
+        <div>
+          <button type='submit'>Entra</button>
+        </div>
+
+      </form>
+    </div>
+  );
+}
