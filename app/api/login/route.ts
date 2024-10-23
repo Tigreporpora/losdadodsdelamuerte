@@ -31,11 +31,17 @@ export async function POST(req: Request) {
             console.error("pool error - max connection reached, waiting for release...");
         });
 
-        //  const [results, fields]= (await pool.query(`SELECT username, password FROM Utente;`))
-        //  const new_ID = results[0].Max_ID +1
+          const [results, fields]= (await pool.query(`SELECT * FROM Utente where username = '${username1}'`))
+          console.log(results[0].PASSWORD)
+          if (password1 == results[0].PASSWORD) {
+            console.log('è andataS')
+            return NextResponse.json({ data: results }, { status: 200 })
+          } else {
+            console.log('1')
+            return  NextResponse.json({ data: results }, { status: 200 })
+          }
 
-        //generare un numero che sia maggiore di 1 dell'ID più alto della tabella utente e inserirlo nella successiva inser
-        //usare esempio della get come base
+       
         //  await pool.query('INSERT INTO Utente value('+ new_ID  +',"' + username1 +'", "' + sesso + '", "' + data + '", "' + dataregistrazione + '", "' + password1 + '")');
 
         return NextResponse.json({ data: true }, { status: 200 });
