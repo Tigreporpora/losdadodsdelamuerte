@@ -1,5 +1,28 @@
+'use client'
+import axios from "axios";
+import { useState } from "react";
+
 
 export default function Login() {
+  const [form, setForm] = useState({});
+
+  const sendData = async () => {
+    await axios.post('/api/login', {
+      username: form.username,
+      password: form.password
+    })
+  }
+  const handleEditForm = (event: any) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setForm((prev:any) => {
+      prev[name] = value;
+      return prev;
+    }
+    )
+  }
+
   return (
     <div>
       {/* np
@@ -13,21 +36,18 @@ export default function Login() {
             se è false andare alla registrazione
 
           */}
-      <form action='/api/login' method="post">
-
         <div>
           <label htmlFor="user"> Username:</label>
-          <input name="username" type="text" placeholder="Username" />
+          <input name="username" type="text" placeholder="Username" onChange={handleEditForm}/>
         </div>
         <div>
           <label htmlFor="pass"> Password:</label>
-          <input name="password" type="password" placeholder="password" />
+          <input name="password" type="password" placeholder="password" onChange={handleEditForm} />
         </div>
         <div>
-          <button type='submit'>Entra</button>
+          <button type='submit' onClick={sendData}>Entra</button>
         </div>
 
-      </form>
     </div>
   );
 }
