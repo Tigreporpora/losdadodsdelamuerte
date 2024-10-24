@@ -13,6 +13,7 @@ export default function Login() {
     })
     if (response.status == 200) {
       alert ('OK');
+      localStorage.setItem('isLogged', 'true')
     }else {
       alert('error')
     }
