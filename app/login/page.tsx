@@ -7,16 +7,21 @@ export default function Login() {
   const [form, setForm] = useState({});
 
   const sendData = async () => {
-    await axios.post('/api/login', {
+    const response = await axios.post('/api/login', {
       username: form.username,
       password: form.password
     })
+    if (response.status == 200) {
+      alert ('OK');
+    }else {
+      alert('error')
+    }
   }
   const handleEditForm = (event: any) => {
     const value = event.target.value;
     const name = event.target.name;
 
-    setForm((prev:any) => {
+    setForm((prev: any) => {
       prev[name] = value;
       return prev;
     }
@@ -36,17 +41,17 @@ export default function Login() {
             se è false andare alla registrazione
 
           */}
-        <div>
-          <label htmlFor="user"> Username:</label>
-          <input name="username" type="text" placeholder="Username" onChange={handleEditForm}/>
-        </div>
-        <div>
-          <label htmlFor="pass"> Password:</label>
-          <input name="password" type="password" placeholder="password" onChange={handleEditForm} />
-        </div>
-        <div>
-          <button type='submit' onClick={sendData}>Entra</button>
-        </div>
+      <div>
+        <label htmlFor="user"> Username:</label>
+        <input name="username" type="text" placeholder="Username" onChange={handleEditForm} />
+      </div>
+      <div>
+        <label htmlFor="pass"> Password:</label>
+        <input name="password" type="password" placeholder="password" onChange={handleEditForm} />
+      </div>
+      <div>
+        <button type='submit' onClick={sendData}>Entra</button>
+      </div>
 
     </div>
   );
