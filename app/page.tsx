@@ -3,8 +3,10 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div>
-      <h1>Los datos de la muerte</h1>
+    <div>  
+      <h1 className="text-3xl font-bold underline">
+      Los dados de la muerte
+    </h1>
       <div>
         <div>
           <Link href="/login">
